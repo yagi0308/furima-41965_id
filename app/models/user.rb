@@ -16,15 +16,12 @@ class User < ApplicationRecord
     validates :first_name_kana
   end
 
-  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
-
   validates :password,
             presence: true,
             length: { minimum: 6 },
             format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/ },
             confirmation: true
-  validates :password_confirmation, presence: true
 
-  has_many :items, dependent: :destroy
-  has_many :purchases, dependent: :destroy
+  # has_many :items, dependent: :destroy
+  # has_many :purchases, dependent: :destroy
 end
