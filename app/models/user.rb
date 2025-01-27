@@ -17,7 +17,6 @@ class User < ApplicationRecord
   end
 
   validates :password,
-            presence: true,
             length: { minimum: 6 },
             format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/ },
             confirmation: true
