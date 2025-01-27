@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_27_013819) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_27_024318) do
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "nickname", null: false
-    t.string "name", null: false
-    t.string "name_reading", null: false
     t.date "date_of_birth", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
