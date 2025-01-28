@@ -21,6 +21,6 @@ class User < ApplicationRecord
             format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/ },
             confirmation: true
 
-  # has_many :items, dependent: :destroy
-  # has_many :purchases, dependent: :destroy
+  has_many :items, dependent: :destroy
+  has_many :purchases, dependent: :destroy
 end
