@@ -132,7 +132,7 @@
       <% @items.each do |item| %>
       <li class='list'>
         
-        <%= link_to items_path(item) do %>
+        <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
         
@@ -148,7 +148,7 @@
             <%= item.item_name %>
           </h3>
           <div class='item-price'>
-            <span><%= item.item_price %>円<br><%= item.item_shipping_fee == 1 ? "着払い(購入者負担)" : "送料込み(出品者負担)"%></span>
+            <span><%= item.item_price %>円<br><%= item.display_shipping_fee %></span>
             <div class='star-btn'>
               <%= image_tag "star.png", class:"star-icon" %>
               <span class='star-count'>0</span>
@@ -159,8 +159,6 @@
       <% end %>
        <% else %>
 
-      <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
-      <%# 商品がある場合は表示されないようにしましょう %>
       <li class='list'>
         <%= link_to "#" do %>
         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -178,8 +176,6 @@
         </div>
         <% end %>
       </li>
-      <%# //商品がある場合は表示されないようにしましょう %>
-      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
        <% end %>
     </ul>
   </div>
