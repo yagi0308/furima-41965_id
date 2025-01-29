@@ -11,7 +11,7 @@ class ItemPrefecture < ActiveHash::Base
     { id: 9, name: '茨城県' },
     { id: 10, name: '栃木県' },
     { id: 11, name: '群馬県' },
-    { id: 12, name: '埼玉都' },
+    { id: 12, name: '埼玉県' },
     { id: 13, name: '東京都' },
     { id: 14, name: '千葉県' },
     { id: 15, name: '神奈川県' },

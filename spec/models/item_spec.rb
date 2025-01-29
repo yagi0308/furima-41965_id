@@ -32,31 +32,31 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーが空では登録できない' do
-        @item.item_category_id = nil
+        @item.item_category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Item category can't be blank")
       end
 
       it '商品の状態が空では登録できない' do
-        @item.item_status_id = nil
+        @item.item_status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Item status can't be blank")
       end
 
       it '配送料の負担が空では登録できない' do
-        @item.item_shipping_fee_id = nil
+        @item.item_shipping_fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Item shipping fee can't be blank")
       end
 
       it '発送元の地域が空では登録できない' do
-        @item.item_prefecture_id = nil
+        @item.item_prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Item prefecture can't be blank")
       end
 
       it '発送までの日数が空では登録できない' do
-        @item.item_scheduled_delivery_id = nil
+        @item.item_scheduled_delivery_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Item scheduled delivery can't be blank")
       end
@@ -77,6 +77,30 @@ RSpec.describe Item, type: :model do
         @item.item_info = 'a' * 1000
         @item.valid?
         expect(@item.errors.full_messages).to include('Item info is too long (maximum is 999 characters)')
+      end
+
+      it '販売価格に半角数字以外が含まれている場合は出品できない' do
+        @item.item_price = '１０００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Item price is not a number')
+      end
+
+      it '販売価格が299円以下の場合は保存できない' do
+        @item.item_price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Item price must be greater than or equal to 300')
+      end
+
+      it '販売価格が10,000,000円以上の場合は保存できない' do
+        @item.item_price = 10_000_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Item price must be less than or equal to 9999999')
+      end
+
+      it 'ユーザー情報がない場合は登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end

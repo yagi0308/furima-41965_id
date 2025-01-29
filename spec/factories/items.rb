@@ -9,7 +9,6 @@ FactoryBot.define do
     item_prefecture_id { 48 }
     item_scheduled_delivery_id { 4 }
     item_price { Faker::Number.between(from: 300, to: 9_999_999) }
-    # 商品画像を追加するためには、ActiveStorageを使用することが一般的です
     after(:build) do |item|
       item.image.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'sample_image.jpg')),
                         filename: 'sample_image.jpg', content_type: 'image/jpeg')

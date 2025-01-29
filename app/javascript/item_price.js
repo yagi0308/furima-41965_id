@@ -5,11 +5,11 @@
 
   const updatePrices = () => {
     const priceValue = parseFloat(itemPrice.value) || 0;
-    const fee = priceValue * 0.1;
-    const profit = priceValue - fee;
-
-    addTaxPrice.textContent = Math.floor(fee);
-    profitDisplay.textContent = Math.floor(profit);
+    const fee = Math.round(priceValue * 0.1); 
+    const profit = priceValue - fee; 
+  
+    addTaxPrice.textContent = fee; 
+    profitDisplay.textContent = profit;
   };
 
   itemPrice.addEventListener("input", updatePrices);
