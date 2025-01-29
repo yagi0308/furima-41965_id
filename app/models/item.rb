@@ -18,14 +18,4 @@ class Item < ApplicationRecord
 
   belongs_to :user
   # has_one :purchase
-
-  SHIPPING_OPTIONS = {
-    1 => '---',
-    2 => '着払い(購入者負担)',
-    3 => '送料込み(出品者負担)'
-  }
-
-  def display_shipping_fee
-    SHIPPING_OPTIONS[item_shipping_fee_id]
-  end
 end
