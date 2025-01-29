@@ -1,6 +1,7 @@
 class RemoveNameAndNameReadingFromUsers < ActiveRecord::Migration[7.1]
   def change
-    remove_column :users, :name, :string
+    if column_exists?(:users, :name_reading)
     remove_column :users, :name_reading, :string
   end
+end
 end
