@@ -5,7 +5,7 @@
 
   const updatePrices = () => {
     const priceValue = parseFloat(itemPrice.value) || 0;
-    const fee = Math.round(priceValue * 0.1); 
+    const fee = Math.floor(priceValue * 0.1);
     const profit = priceValue - fee; 
   
     addTaxPrice.textContent = fee; 
