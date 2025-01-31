@@ -70,6 +70,6 @@ class ItemsController < ApplicationController
   end
 
   def check_user
-    redirect_to root_path unless @item.user_id == current_user.id
+    redirect_to user_session_path unless @item.user == current_user
   end
 end
