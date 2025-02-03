@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
-  before_action :redirect_if_seller, only: [:index, :create]
+  before_action :redirect_if_seller_or_sold, only: [:index, :create]
 
   def index
     @item = Item.find(params[:item_id])
@@ -31,8 +31,8 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def redirect_if_seller
-    return unless @item.user == current_user
+  def redirect_if_seller_or_sold
+    return unless @item.user_id == current_user.id || @item.order.present?
 
     redirect_to root_path
   end
