@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:edit, :update, :show, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
+  before_action :check_item_sold, only: [:edit, :update]
   def index
     @items = Item.order('created_at DESC')
   end
@@ -40,7 +41,6 @@ class ItemsController < ApplicationController
     @item_shipping_fees = ItemShippingFee.all
     @item_prefectures = ItemPrefecture.all
     @item_scheduled_delivery = ItemScheduledDelivery.all
-    redirect_to root_path
   end
 
   def update
@@ -76,6 +76,12 @@ class ItemsController < ApplicationController
 
   def check_user
     redirect_to user_session_path unless @item.user == current_user
+  end
+
+  def check_item_sold
+    return unless @item.order.present?
+
+    redirect_to root_path
   end
 
   def item_params
