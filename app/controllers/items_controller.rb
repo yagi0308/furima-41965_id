@@ -3,6 +3,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :show, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
   before_action :check_item_sold, only: [:edit, :update]
+  before_action :redirect_if_seller, only: [:edit, :update, :destroy]
+
   def index
     @items = Item.order('created_at DESC')
   end
@@ -64,8 +66,7 @@ class ItemsController < ApplicationController
   private
 
   def redirect_if_seller
-    item = Item.find(params[:item_id])
-    return unless item.user == current_user
+    return if @item.user == current_user
 
     redirect_to root_path
   end

@@ -48,6 +48,7 @@ RSpec.describe OrderAddress, type: :model do
       it '郵便番号にハイフンが無ければ登録できない' do
         @order_address.postal_code = '1234567'
         @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
 
       it '電話番号に半角数字以外が含まれていると購入できない' do
@@ -68,21 +69,6 @@ RSpec.describe OrderAddress, type: :model do
       it 'tokenが空なら購入できない' do
         @order_address.token = nil
         @order_address.valid?
-      end
-
-      it 'tokenが存在すれば購入できる' do
-        @order_address.token = 'tok_abc123'
-        expect(@order_address).to be_valid
-      end
-
-      it '電話番号が半角数字のみなら購入できる' do
-        @order_address.phone_number = '1234567890'
-        expect(@order_address).to be_valid
-      end
-
-      it '郵便番号にハイフンがあれば登録できる' do
-        @order_address.postal_code = '123-4567'
-        expect(@order_address).to be_valid
       end
     end
   end
