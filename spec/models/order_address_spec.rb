@@ -12,6 +12,11 @@ RSpec.describe OrderAddress, type: :model do
       it '全ての情報が正しく入力されていれば保存できる' do
         expect(@order_address).to be_valid
       end
+
+      it '建物名がなくても登録できる' do
+        @order_address.building = nil
+        expect(@order_address).to be_valid
+      end
     end
 
     context '異常系' do
@@ -69,6 +74,25 @@ RSpec.describe OrderAddress, type: :model do
       it 'tokenが空なら購入できない' do
         @order_address.token = nil
         @order_address.valid?
+      end
+
+      it 'user_idが空だと購入できない' do
+        @order_address.user_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空だと購入できない' do
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it 'user_idとitem_idが両方空だと購入できない' do
+        @order_address.user_id = nil
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank", "Item can't be blank")
       end
     end
   end
