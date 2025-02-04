@@ -3,6 +3,7 @@
   const addTaxPrice = document.getElementById("add-tax-price");
   const profitDisplay = document.getElementById("profit");
 
+  if (itemPrice && addTaxPrice && profitDisplay) {
   const updatePrices = () => {
     const priceValue = parseFloat(itemPrice.value) || 0;
     const fee = Math.floor(priceValue * 0.1);
@@ -14,7 +15,7 @@
 
   itemPrice.addEventListener("input", updatePrices);
   updatePrices(); 
-
+  }
 };
 
 window.addEventListener("turbo:load", price);
